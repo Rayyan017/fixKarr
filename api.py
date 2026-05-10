@@ -11,8 +11,10 @@ from typing import Dict
 import hashlib
 import sqlite3
 
-# Ensure imports resolve
-sys.path.insert(0, os.path.dirname(__file__))
+# Ensure imports resolve using absolute paths
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+if BASE_DIR not in sys.path:
+    sys.path.insert(0, BASE_DIR)
 
 from db.setup import init_db, get_connection
 from patterns.factory import FaultReportFactory
@@ -401,7 +403,7 @@ def get_analytics():
 def get_history():
     return fetch_job_history()
 
-static_path = os.path.join(os.path.dirname(__file__), "static")
+static_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "static"))
 app.mount("/static", StaticFiles(directory=static_path), name="static")
 
 @app.get("/")
