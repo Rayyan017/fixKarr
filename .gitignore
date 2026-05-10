@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+fixkar.db
+.env
+node_modules/
+.DS_Store
